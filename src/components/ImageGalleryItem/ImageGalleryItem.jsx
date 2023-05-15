@@ -5,7 +5,7 @@ class ImageGalleryItem extends Component {
 
     render() {
         return (
-            <li class={css.ImageGalleryItem}>
+            <li className={css.ImageGalleryItem}>
                 <img className={css.ImageGalleryItemImg} src="" alt="" />
             </li>
         )

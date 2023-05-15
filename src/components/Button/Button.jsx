@@ -5,7 +5,7 @@ class Button extends Component {
 
     render() {
         return (
-            <button type="button" class={css.Button}>Loade more
+            <button type="button" className={css.Button}>Loade more
             </button>
 
         );

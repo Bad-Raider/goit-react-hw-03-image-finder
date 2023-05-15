@@ -9,16 +9,21 @@ import Loader from "./Loader/Loader";
 
 class App extends Component {
 
-  BASE_URL = 'u_7h5ye579eo'
+  // BASE_URL = 'u_7h5ye579eo'
+  state = {
+    name: '',
+  };
 
-
+  onSubmit = (nameForm) => {
+    this.setState({name: nameForm})
+  };
 
   render() {
     
     return (
       <div className={css.App} >
-        <Searchbar />
-        <ImageGallery />
+        <Searchbar onSubmit={this.onSubmit} />
+        <ImageGallery name={this.state.name} />
         {/* <Modal/> */}
         <Button />
         <Loader/>
