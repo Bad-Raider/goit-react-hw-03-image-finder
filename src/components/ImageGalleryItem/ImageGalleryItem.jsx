@@ -6,7 +6,7 @@ class ImageGalleryItem extends Component {
     render() {
         return (
             <li className={css.ImageGalleryItem}>
-                <img className={css.ImageGalleryItemImg} src={this.props.littleImg} alt="" />
+                <img className={css.ImageGalleryItemImg} src={this.props.littleImg} alt='' />
             </li>
         )
     }
