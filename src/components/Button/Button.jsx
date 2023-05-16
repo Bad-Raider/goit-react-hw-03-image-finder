@@ -3,9 +3,16 @@ import css from './Button.module.css';
 
 class Button extends Component {
 
+    handleOnClick = () => {
+     this.props.onClick()
+    };
+
     render() {
         return (
-            <button type="button" className={css.Button}>Loade more
+            <button
+                onClick={this.handleOnClick}
+                type="button"
+                className={css.Button}>Loade more
             </button>
 
         );

@@ -5,18 +5,24 @@ class Searchbar extends Component{
     
     state = {
         name: '',
+        disabled: true,
     };
 
     handleOnChange = (e) => {
-        console.log(e.target.value);
-      this.setState({name: e.currentTarget.value})   
+        this.setState({
+            name: e.currentTarget.value,
+            disabled: false
+        });
     };
 
     handleOnSubmit = (e) => {
         e.preventDefault()
+        
+
         this.props.onSubmit(this.state.name);
         this.setState({
             name: '',
+            disabled: true,
         });
     };
 
@@ -30,7 +36,9 @@ class Searchbar extends Component{
                     <form
                         className={css.SearchForm}
                     onSubmit={this.handleOnSubmit}>
-                        <button type="submit" className={css.SearchFormButton}>
+                        <button type="submit"
+                            className={css.SearchFormButton}
+                            disabled={this.state.disabled}>
                             <span className={css.SearchFormButtonLabel}>Search</span>
                         </button>
 
