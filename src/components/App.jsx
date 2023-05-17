@@ -6,8 +6,6 @@ import ImageGallery from "./ImageGallery/ImageGallery";
 import Button from "./Button/Button";
 import Loader from "./Loader/Loader"; 
 
-// import Modal from "./Modal/Modal";
-
 
 class App extends Component {
 
@@ -16,16 +14,15 @@ class App extends Component {
     page: 1,
     arrPictures: [],
     isLoading: false,
-    // error: null,
+    error: null,
   };
 
   async componentDidUpdate(prevProps, prevState) {
     const {name, page} = this.state;
-    
         
     if (prevState.name !== name) {
       try {
-        this.setState({isLoading: true})
+        this.setState({ isLoading: true });
         const { hits } = await fetchImg(name, page);
         this.setState({ arrPictures: hits, });
       }
@@ -33,13 +30,14 @@ class App extends Component {
         console.log(error.message);
       }
       finally {
-        this.setState({isLoading: false})
+        this.setState({ isLoading: false });
       }
     }
 
     if (prevState.page !== page) {
 
       try {
+        this.setState({ isLoading: true });
         const { hits } = await fetchImg(name, page);
           this.setState(prevState => ({
             arrPictures: [...prevState.arrPictures, ...hits],
@@ -47,6 +45,9 @@ class App extends Component {
       }
       catch (error) {
         console.log(error.message);
+      }
+      finally {
+        this.setState({ isLoading: false });
       }
     }
   };
@@ -58,12 +59,12 @@ class App extends Component {
 
 
   hadlerOnClick = () => {
-     this.setState(prevState => ({ page: prevState.page + 1 }))
+    this.setState(prevState => ({ page: prevState.page + 1 }))
   };
+
 
   render() {
     const {name, arrPictures, isLoading } = this.state;
-    console.log(this.state.page);
 
     return (
       <div className={css.App} >
@@ -72,13 +73,11 @@ class App extends Component {
           arr={arrPictures}
           name={name}
         />
-        {/* <Modal/> */}
-
         {isLoading && <Loader />}
 
         {(arrPictures.length > 0) &&
           <Button onClick={this.hadlerOnClick} />}
-
+          
       </div>
     )
   }

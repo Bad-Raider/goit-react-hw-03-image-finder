@@ -1,5 +1,5 @@
 import { Component } from "react";
-import css from './Searchbar.module.css'
+import css from './Searchbar.module.css';
 
 class Searchbar extends Component{
     
@@ -17,7 +17,6 @@ class Searchbar extends Component{
 
     handleOnSubmit = (e) => {
         e.preventDefault()
-        
 
         this.props.onSubmit(this.state.name);
         this.setState({
@@ -25,9 +24,6 @@ class Searchbar extends Component{
             disabled: true,
         });
     };
-
-    
-
 
     render() {
         return (
@@ -56,5 +52,6 @@ class Searchbar extends Component{
             </>
         );
     }
-} 
+}; 
 export default Searchbar;
+
