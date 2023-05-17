@@ -18,6 +18,10 @@ class Searchbar extends Component{
     handleOnSubmit = (e) => {
         e.preventDefault()
 
+        if (this.state.name.trim() === "") {
+            return alert("Чуваче, введи назву картинки :)")
+        }
+
         this.props.onSubmit(this.state.name);
         this.setState({
             name: '',

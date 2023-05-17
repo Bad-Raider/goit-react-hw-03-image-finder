@@ -1,23 +1,30 @@
 import { Component } from 'react';
 import { createPortal } from 'react-dom';
 import css from './Modal.module.css';
+import PropTypes from "prop-types";
 
 const modalRoot = document.querySelector("#modal-root");
 
 class Modal extends Component {
 
     componentDidMount() {
-        window.addEventListener("keydown", e => {
-            if (e.code === "Escape") {
-                // this.props.onChangeStatusModal();
-                console.log('pfrhbdfq')
-            }
-        });    
+    window.addEventListener('keydown', this.handleKeydownEscape);
     };
 
-    handleOnClick = (e) => {
-        // const
-        this.props.onChangeStatusModal();  
+    componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeydownEscape);
+    };
+
+    handleKeydownEscape = e => {
+        if (e.code === 'Escape') {
+            this.props.onChangeStatusModal();
+        };
+    };
+
+    handleOnClick = e => {
+        if (e.currentTarget === e.target) {
+            this.props.onChangeStatusModal();
+        }
     };
 
     render() {
@@ -32,3 +39,10 @@ class Modal extends Component {
 };
 
 export default Modal;
+
+
+Modal.propTypes = {
+    onChangeStatusModal: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    largeImg: PropTypes.string.isRequired,
+};
