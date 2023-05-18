@@ -22,7 +22,7 @@ class App extends Component {
   async componentDidUpdate(prevProps, prevState) {
     const {name, page, perPage} = this.state;
         
-    if (prevState.name !== name ) {
+    if (prevState.name !== name || prevState.page !== page ) {
       try {
         this.setState({ isLoading: true });
         const { totalHits, hits, } = await fetchImg(name, page, perPage);
@@ -32,40 +32,22 @@ class App extends Component {
           return { id, largeImageURL, webformatURL }
         });
 
+        if (page === 1) {
         this.setState({
           arrPictures: newArr,
-          totalPage: totalPage,
+          totalPage,
         });
+        } else {
+        this.setState(prevState => ({
+          arrPictures: [...prevState.arrPictures, ...newArr],
+        }));
+        };
 
         if (hits.length === 0) {
           alert(
             'Sorry, there are no images matching your search query. Please try again.'
           );
         }
-      }
-      catch (error) {
-        this.setState({
-          error: error.message,
-        });
-      }
-      finally {
-        this.setState({ isLoading: false });
-      }
-    }
-
-    if (prevState.page !== page) {
-
-      try {
-        this.setState({ isLoading: true });
-        const { hits } = await fetchImg(name, page, perPage);
-
-        const newArr = hits.map(({ id, largeImageURL, webformatURL, }) => {
-          return { id, largeImageURL, webformatURL }
-        });
-
-          this.setState(prevState => ({
-            arrPictures: [...prevState.arrPictures, ...newArr],
-        }));    
       }
       catch (error) {
         this.setState({
@@ -95,7 +77,7 @@ class App extends Component {
 
   render() {
     const {name, arrPictures, isLoading, totalPage, page } = this.state;
-
+    console.log(arrPictures)
     return (
       <div className={css.App} >
         <Searchbar onSubmit={this.onSubmit} />
