@@ -15,6 +15,7 @@ class Button extends Component {
                 onClick={this.handleOnClick}
                 type="button"
                 className={css.Button}>Loade more
+                
             </button>
         );
     }
